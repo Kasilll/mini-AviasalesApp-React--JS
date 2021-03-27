@@ -11,11 +11,12 @@ const Ticket = React.memo(function Ticket({ renderTickets }) {
 				<div className="price">{renderTickets.price}</div>
 				<img className="airline-logo" src={logo} />
 			</div>
-			{renderTickets.segments.map((el, ind) => (
+			{renderTickets.segments.map((el, ind) => ( // В этом всегда два элемента, перелет туда и обратно
 				<Block
 					duration={renderTickets.segments[ind].duration}
 					ticket={renderTickets}
 					ind={ind}
+					key={`${el}_${ind}`}
 					departureDate={new Date(renderTickets.segments[ind].date)}
 				/>
 			))}
