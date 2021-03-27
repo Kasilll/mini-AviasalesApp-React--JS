@@ -27,13 +27,11 @@ function App() {
 		fetch('https://front-test.beta.aviasales.ru/search').then((r) => r.json()).then((r) => setSearchId(r.searchId))
 	}, [])
 
-	const [ renderTicket, setRenderTicket ] = React.useState([])
-
 	React.useEffect(
 		() => {
 			if (searchId && !allTicketsReceive) {
 				subscribeServerRequest(searchId, setAllTicketsReceive, setDataTickets, dataTickets)
-			}
+			} else setRenderTickets(dataTickets)
 		},
 		[ searchId, dataTickets ]
 	)
@@ -42,9 +40,9 @@ function App() {
 		<div>
 			<div className="wraper">
 				<div className="content">
-					<Filters renderTicket={renderTicket} setRenderTicket={setRenderTicket} dataTickets={dataTickets} />
+					<Filters dataTickets={dataTickets} setRenderTickets={setRenderTickets}/>
 					<div className="tickets">
-						{allTicketsReceive ? dataTickets.slice(0, 20).map((el) => <Ticket dataTickets={el} />) : ''}
+						{allTicketsReceive ? renderTickets.slice(0, 20).map((el) => <Ticket renderTickets={el} />) : ''}
 					</div>
 				</div>
 			</div>

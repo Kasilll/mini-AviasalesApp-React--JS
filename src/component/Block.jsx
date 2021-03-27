@@ -1,4 +1,5 @@
 import React from 'react'
+import '../Scss/Block.scss'
 
 function calculateDurationHours(duration) {
 	return Math.floor(duration / 60)
@@ -14,15 +15,15 @@ function countTransplants(transplants) {
 	else return `${transplants} пересадки`
 }
 
-export default function Block({ duration, ticket, ind, date }) {
+export default function Block({ duration, ticket, ind, departureDate }) {
 	const durationHours = calculateDurationHours(duration)
     const durationMinute = calculateDurationMinute(duration)
-    const arrivalDate = new Date(date.getTime() + duration * 60000)
+    const arrivalDate = new Date(departureDate.getTime() + duration * 60000)
 
 	return (
 		<div className="block">
 			<div className="time" >
-                {date.getHours()}:{date.getMinutes()} - {arrivalDate.getHours()} : {arrivalDate.getMinutes()}
+                {departureDate.getHours()}:{departureDate.getMinutes()} - {arrivalDate.getHours()} : {arrivalDate.getMinutes()}
             </div>
 			<div className="duration">
 				<div className="duration__text">В пути</div>
